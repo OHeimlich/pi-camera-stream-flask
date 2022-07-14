@@ -1,14 +1,14 @@
 [Unit]
-Description=Yolo5 Service
+Description=Object Detection Agent
 After=network.target
 StartLimitIntervalSec=0
 [Service]
 Type=simple
 Restart=always
 RestartSec=1
-User=ubuntu
-WorkingDirectory=/home/pi/Documents/projects/pi-camera-stream-flask
-ExecStart=/home/pi/Documents/projects/pi-camera-stream-flask/venv/bin/python ./agent.py
+User=pi
+WorkingDirectory=/home/pi/pi-camera-stream-flask
+ExecStart=/home/pi/pi-camera-stream-flask/venv/bin/python ./agent.py
 
 
 [Install]

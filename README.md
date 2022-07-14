@@ -2,18 +2,6 @@
 
 Create your own live stream from a Raspberry Pi using the Pi camera module. Build your own applications from here.
 
-## How it works
-The Pi streams the output of the camera module over the web via Flask. Devices connected to the same network would be able to access the camera stream via
-
-```
-<raspberry_pi_ip:5000>
-```
-
-## Screenshots
-| ![Setup](readme/pi-stream-client.jpg) | ![Live Pi Camera Stream](readme/pi-stream-screen-capture.jpg) |
-| ------------------------------------- | ------------------------------------------------------------- |
-| Pi Setup                              | Pi - Live Stream                                              |
-
 ## Preconditions
 
 * Raspberry Pi 4, 2GB is recommended for optimal performance. However you can use a Pi 3 or older, you may see a increase in latency.
@@ -57,32 +45,23 @@ cd /home/pi
 git clone https://github.com/EbenKouao/pi-camera-stream-flask.git
 ```
 
-## Step 2 – Launch Web Stream
-
-Note: Creating an Autostart of the main.py script is recommended to keep the stream running on bootup.
-```bash cd modules
-sudo python3 /home/pi/pi-camera-stream-flask/main.py
+## step 2 - Create virtual environment
+```
+python3 -m venv venv
+```
+## step 3 - Install requirements 
+```
+pip install -r requirements.txt
 ```
 
-## Step 3 – Autostart your Pi Stream
-
-Optional: A good idea is to make the the camera stream auto start at bootup of your pi. You will now not need to re-run the script every time you want to create the stream. You can do this by going editing the /etc/profile to:
-
+## Step 4 – Launch Web Stream
 ```
-sudo nano /etc/profile
+python /home/pi/pi-camera-stream-flask/main.py
 ```
 
-Go the end of the and add the following (from above):
-
+## Step 5 - Setup the detection agent
 ```
-sudo python3 /home/pi/pi-camera-stream-flask/main.py
+sudo cp agent.service /etc/systemd/system/
+sudo systemctl enable agent
+sudo systemctl start agent
 ```
-
-This would cause the following terminal command to auto-start each time the Raspberry Pi boots up. This in effect creates a headless setup - which would be accessed via SSH.
-Note: make sure SSH is enabled.
-
-## More Projects / Next Steps
-View the latest Build: [Pi Smart Cam with Motion Sensor](https://github.com/EbenKouao/pi-smart-cam)
-
-Alternatively, view more projects that build on the Pi Camera on [smartbuilds.io](https://smartbuilds.io).
-

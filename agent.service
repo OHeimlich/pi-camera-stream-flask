@@ -1,0 +1,15 @@
+[Unit]
+Description=Yolo5 Service
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=ubuntu
+WorkingDirectory=/home/pi/Documents/projects/pi-camera-stream-flask
+ExecStart=/home/pi/Documents/projects/pi-camera-stream-flask/venv/bin/python ./agent.py
+
+
+[Install]
+WantedBy=multi-user.target

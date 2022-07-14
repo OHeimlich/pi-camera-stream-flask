@@ -159,6 +159,22 @@ body {
          </a>
     </div>
 
+    <div class="detect">
+          <a href=# id=detect class="picture_class">
+              <button id="detect-button" onclick="take_picture()">
+                  <i style="background: blue; color: white;" class="fa fa-camera fa-2x" aria-hidden="true"></i>
+              </button>
+         </a>
+    </div>
+
+    <div class="agent">
+          <a href=# id=agent class="picture_class">
+              <button id="agent-button" onclick="take_picture()">
+                  <i style="background: blue; color: white;" class="fa fa-camera fa-2x" aria-hidden="true"></i>
+              </button>
+         </a>
+    </div>
+
 </div>
 
 
@@ -185,6 +201,28 @@ $(function() {
   $('a#take-picture').on('click', function(e) {
     e.preventDefault()
     $.getJSON('/picture',
+        function(data) {
+      //do nothing
+    });
+    return false;
+  });
+});
+
+$(function() {
+  $('a#detect').on('click', function(e) {
+    e.preventDefault()
+    $.getJSON('/detect',
+        function(data) {
+      //do nothing
+    });
+    return false;
+  });
+});
+
+$(function() {
+  $('a#agent').on('click', function(e) {
+    e.preventDefault()
+    $.getJSON('/agent',
         function(data) {
       //do nothing
     });

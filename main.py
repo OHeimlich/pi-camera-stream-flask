@@ -5,6 +5,8 @@
 # import the necessary packages
 from flask import Flask, render_template, Response, request, send_from_directory
 from camera import VideoCamera
+import requests
+
 import os
 
 pi_camera = VideoCamera(flip=False) # flip pi camera if upside down.
@@ -34,6 +36,29 @@ def take_picture():
     pi_camera.take_picture()
     return "None"
 
-if __name__ == '__main__':
 
+def _detect():
+    frame = pi_camera.get_frame()
+    url = f"http://34.246.116.177:8000/model/inference_and_report"
+    response = None
+    try:
+        response = requests.post(url, files={"file": frame})
+        print(response.json())
+    except:
+        pass
+    return response
+
+
+@app.route('/detect')
+def detect():
+    return _detect()
+
+@app.route('/agent')
+def agent():
+    while True:
+        _detect()
+
+
+
+if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)

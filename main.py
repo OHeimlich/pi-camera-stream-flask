@@ -12,6 +12,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html') #you can customze index.html here
 
+
 def gen(camera):
     while True:
         frame = camera.get_frame()
@@ -28,7 +29,7 @@ def video_feed():
 @app.route('/picture')
 def take_picture():
     pi_camera.take_picture()
-    return "None"
+    return None
 
 
 @app.route('/detect')
@@ -46,4 +47,4 @@ def detect():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=False)

@@ -3,6 +3,7 @@
 #Desc: This scrtipt script..
 
 import cv2 as cv
+from imutils.video.pivideostream import PiVideoStream
 import imutils
 import time
 from datetime import datetime
@@ -11,12 +12,14 @@ from datetime import datetime
 
 class VideoCamera(object):
     def __init__(self, flip = False, file_type  = ".jpg", photo_string= "stream_photo"):
-        if False:  # only on laptop with webcam
-            self.vs = cv.VideoCapture(0)
-        else:
-            from imutils.video.pivideostream import PiVideoStream
-            # self.vs = PiVideoStream(resolution=(1920, 1080), framerate=30).start()
-            self.vs = PiVideoStream().start()
+        # if False:  # only on laptop with webcam
+        #     self.vs = cv.VideoCapture(0)
+        # else:
+        #     from imutils.video.pivideostream import PiVideoStream
+        #     self.vs = PiVideoStream(resolution=(1920, 1080), framerate=30).start()
+            # self.vs = PiVideoStream().start()
+        self.vs = PiVideoStream(resolution=(1920, 1080), framerate=30).start()
+        # self.vs = PiVideoStream().start()
         self.flip = flip # Flip frame vertically
         self.file_type = file_type # image type i.e. .jpg
         self.photo_string = photo_string # Name to save the photo

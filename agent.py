@@ -39,10 +39,12 @@ def detect():
 
 
 def report(force=False):
+    print("Start report")
     global last_report
     now = datetime.datetime.utcnow()
     if (now - last_report).total_seconds() <= 60 * 10 and not force:
         return
+    print("Sending report")
     last_report = now
     frame, stream = get_frame()
     url = f"http://{config.url}:8000/image/report"
@@ -58,8 +60,8 @@ def main():
     while True:
         results = detect()
         report()
-        logging.info(results)
-        logging.info("Going to Sleep")
+        print(results)
+        print("Going to Sleep")
         sleep(3)
 
 if __name__ == '__main__':

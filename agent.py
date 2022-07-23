@@ -42,7 +42,7 @@ def report(force=False):
     print("Start report")
     global last_report
     now = datetime.datetime.utcnow()
-    if (now - last_report).total_seconds() <= 60 * 10 or not force:
+    if (now - last_report).total_seconds() <= 60 * 10 and not force:
         return
     print("Sending report")
     last_report = now

@@ -57,8 +57,7 @@ def report(force=False):
     frame, stream = get_frame()
     url = f"http://{config.url}:8000/image/report"
     try:
-        response = requests.post(url, files={"file": stream.getvalue()})
-        logging.info(response.json())
+        requests.post(url, files={"file": stream.getvalue()})
         requests.get(f"http://{config.url}:8000/post_message", params={"message": f"raspberry IP: {get_ip()}"})
     except:
         pass

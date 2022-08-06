@@ -18,7 +18,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 def get_frame():
     # Create the in-memory stream
     stream = BytesIO()
-    camera = PiCamera(resolution=(2560, 1440))
+    camera = PiCamera(resolution=(3280, 2464))
     camera.start_preview()
     sleep(3)
     camera.capture(stream, format='jpeg')

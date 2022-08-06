@@ -12,6 +12,7 @@ import config
 
 # cam = VideoCamera()
 last_report = datetime.datetime.utcnow()
+logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
 
 def get_frame():
@@ -58,7 +59,7 @@ def report(force=False):
     try:
         response = requests.post(url, files={"file": stream.getvalue()})
         logging.info(response.json())
-        requests.post(f"http://{config.url}:8000/post_message", params={"message": f"raspberry IP: {get_ip()}"})
+        requests.get(f"http://{config.url}:8000/post_message", params={"message": f"raspberry IP: {get_ip()}"})
     except:
         pass
 

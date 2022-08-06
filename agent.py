@@ -1,5 +1,6 @@
 import datetime
 import logging
+import socket
 from io import BytesIO
 from time import sleep
 from PIL import Image
@@ -37,6 +38,12 @@ def detect():
         pass
     return response
 
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    ip = s.getsockname()[0]
+    s.close()
+    return ip
 
 def report(force=False):
     print("Start report")
@@ -51,6 +58,7 @@ def report(force=False):
     try:
         response = requests.post(url, files={"file": stream.getvalue()})
         logging.info(response.json())
+        requests.post(f"http://{config.url}:8000/post_message", params={"message": f"raspberry IP: {get_ip()}"})
     except:
         pass
 

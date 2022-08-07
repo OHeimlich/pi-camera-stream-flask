@@ -18,7 +18,7 @@ class VideoCamera(object):
         #     from imutils.video.pivideostream import PiVideoStream
         #     self.vs = PiVideoStream(resolution=(1920, 1080), framerate=30).start()
             # self.vs = PiVideoStream().start()
-        self.vs = PiVideoStream(resolution=(2560, 1440), framerate=30).start()
+        self.vs = PiVideoStream(resolution=(3280, 2464), framerate=30).start()
         # self.vs = PiVideoStream().start()
         self.flip = flip # Flip frame vertically
         self.file_type = file_type # image type i.e. .jpg

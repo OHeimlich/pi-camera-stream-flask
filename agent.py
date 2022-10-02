@@ -18,11 +18,12 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 def get_frame():
     # Create the in-memory stream
     stream = BytesIO()
-    camera = PiCamera(resolution=(3280, 2464))
-    camera.start_preview()
-    sleep(3)
-    camera.capture(stream, format='jpeg')
-    camera.close()
+    with PiCamera() as camera:
+        camera.resolution = (3280, 2464)
+        camera.start_preview()
+        sleep(3)
+        camera.capture(stream, format='jpeg')
+    # camera = PiCamera(resolution=(2560, 1440))
     # "Rewind" the stream to the beginning so we can read its content
     stream.seek(0)
     image = Image.open(stream)
